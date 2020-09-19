@@ -51,20 +51,82 @@ struct ContentView: View {
                         .fontWeight(.heavy)
                     ){
                         ForEach(self.players[section]){ player in
-                            HStack{
-                                player.image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .clipShape(Circle())    //画像を丸くする
-                                    .frame(width: 50, height: 50)   //画像サイズを指定
-                                Text(player.name)
-                                    .font(.headline)
-                                    .padding(.leading, 20)  //画像と文字の間を空ける
-                            }
+                            
+                            //Cell呼び出し
+                            PlayerRow(player: player, generation: self.switchHeaderTitle(section: section))
                         }
                     }.frame(height: 70) //セクションの高さを調整
                 }
             }.navigationBarTitle(Text("プログラミング言語"))
+        }
+    }
+    
+    
+    //cellに関する情報をこのviewに記載
+    struct PlayerRow: View {
+        
+        let player : Player
+        let generation : String
+        
+        var body : some View{
+            HStack{
+                //関数呼び出し(cell押下のビューを表示)
+                NavigationLink(destination: PlayerDetail(player: player, generation: generation)){
+                    player.image
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())    //画像を丸くする
+                        .frame(width: 50, height: 50)   //画像サイズを指定
+                    Text(player.name)
+                        .font(.headline)
+                        .padding(.leading, 20)  //画像と文字の間を空ける
+                }
+            }
+        }
+    }
+    
+    //cell押下のビューを表示
+    //詳細情報を表示
+    struct PlayerDetail : View{
+        
+        let player : Player
+        let generation : String
+        
+        var body : some View{
+            
+            NavigationView{
+                VStack{
+                    //画像表示と画像設定
+                    player.image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 400, height: 400, alignment: .top)
+                        .cornerRadius(20)
+                        .padding(.init(top:0,leading: 0,bottom: 0,trailing: 50))
+            
+                    HStack{
+                        Text(player.name)
+                            .font(.system(size: 30, weight: .heavy))
+                            .padding(.top, -60)
+                            .padding(.trailing, 20)
+//                            .foregroundColor(.white)
+                    }
+                    .frame(width: 330, height: 60, alignment: .trailing)
+                    //横並びに文字を表示
+                    HStack{
+                        Text("どんな言語?:")
+                            .font(.system(size: 20, weight: .medium))
+                        Text(generation)
+                            .font(.system(size: 20, weight: .heavy))
+                            .padding(.leading, 5)
+                    }
+//                    .frame(width: 400, height: 40, alignment: .leading)
+                    .padding(.leading, 20)
+                    Spacer()
+                }.padding(.top, -80)        //画像の配置を調整
+            }.navigationBarTitle(Text("プログラミング言語"),displayMode: .inline) //displaymodeで表示のさせ方を変更できる
+            
+            
         }
     }
     
