@@ -4,9 +4,9 @@
 UITableViewのcellにプログラミング言語の名前を載せ、cellを押すと画像を拡大表示できる詳細Viewに飛ぶアプリ。
 
 ### 開発環境
-- macOS：Catalina
-- Xcode：11.6
-- Swift：5
+- macOS Catalina
+- Xcode11.6
+- Swift5
 
 ### 今回挑戦したこと
 - SwiftUIで簡易アプリを開発
