@@ -1,7 +1,7 @@
 # SwiftUIを使用したUITableView作成
 
 ### アプリ概要 
-UITableViewのcellにプログラミング言語を載せ、cellを押すと画像を拡大表示できる詳細Viewに飛ぶアプリ。
+UITableViewのcellにプログラミング言語の名前を載せ、cellを押すと画像を拡大表示できる詳細Viewに飛ぶアプリ。
 
 ### 開発環境
 macOS：Catalina
