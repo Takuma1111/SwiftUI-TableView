@@ -9,7 +9,7 @@
 import SwiftUI
 
 //画像情報を設定する構造体
-struct Player : Identifiable{ //Identifiableとはidという変数を持っていることを示すプロトコル
+struct Language : Identifiable{ //Identifiableとはidという変数を持っていることを示すプロトコル
     var id:Int
     let name:String
     let image: Image
@@ -18,7 +18,7 @@ struct Player : Identifiable{ //Identifiableとはidという変数を持って�
 struct ContentView: View {
     
     //名前と画像名を追加
-    let players : [[Player]] = [ //多次元配列
+    let languages : [[Language]] = [ //多次元配列
         [.init(id: 0 ,name: "Python", image: Image("kisspng-angle-text-symbol-brand-other-python-5ab0c09b9ea1a7.3286927515215330836498")),
          .init(id:1,name: "C#", image: Image("kisspng-c-programming-language-logo-microsoft-visual-stud-atlas-portfolio-5b899192d7c600.1628571115357423548838")),
          .init(id:2,name: "JavaScript", image: Image("kisspng-javascript-programmer-programming-language-compute-node-js-5b35fcbd143445.0682463015302647650828")),
@@ -44,16 +44,16 @@ struct ContentView: View {
         NavigationView{
             List{
                 //ループする回数を指定
-                ForEach(players.startIndex...(players.endIndex - 1), id: \.self){
+                ForEach(languages.startIndex...(languages.endIndex - 1), id: \.self){
                     section in
                     Section(header: Text(self.switchHeaderTitle(section: section))   //セクション分けし、idを元にタイトルを設定
                         .font(.system(size: 30))
                         .fontWeight(.heavy)
                     ){
-                        ForEach(self.players[section]){ player in
+                        ForEach(self.languages[section]){ language in
                             
                             //Cell呼び出し
-                            PlayerRow(player: player, generation: self.switchHeaderTitle(section: section))
+                            PlayerRow(languages : language, generation: self.switchHeaderTitle(section: section))
                         }
                     }.frame(height: 70) //セクションの高さを調整
                 }
@@ -65,19 +65,19 @@ struct ContentView: View {
     //cellに関する情報をこのviewに記載
     struct PlayerRow: View {
         
-        let player : Player
+        let languages : Language
         let generation : String
         
         var body : some View{
             HStack{
                 //関数呼び出し(cell押下のビューを表示)
-                NavigationLink(destination: PlayerDetail(player: player, generation: generation)){
-                    player.image
+                NavigationLink(destination: PlayerDetail(languages: languages, generation: generation)){
+                    languages.image
                         .resizable()
                         .scaledToFill()
                         .clipShape(Circle())    //画像を丸くする
                         .frame(width: 50, height: 50)   //画像サイズを指定
-                    Text(player.name)
+                    Text(languages.name)
                         .font(.headline)
                         .padding(.leading, 20)  //画像と文字の間を空ける
                 }
@@ -89,7 +89,7 @@ struct ContentView: View {
     //詳細情報を表示
     struct PlayerDetail : View{
         
-        let player : Player
+        let languages :Language
         let generation : String
         
         var body : some View{
@@ -97,7 +97,7 @@ struct ContentView: View {
             NavigationView{
                 VStack{
                     //画像表示と画像設定
-                    player.image
+                    languages.image
                         .resizable()
                         .scaledToFill()
                         .frame(width: 400, height: 400, alignment: .top)
@@ -105,7 +105,7 @@ struct ContentView: View {
                         .padding(.init(top:0,leading: 0,bottom: 0,trailing: 50))
             
                     HStack{
-                        Text(player.name)
+                        Text(languages.name)
                             .font(.system(size: 30, weight: .heavy))
                             .padding(.top, -60)
                             .padding(.trailing, 20)
