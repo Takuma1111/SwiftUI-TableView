@@ -109,7 +109,6 @@ struct ContentView: View {
                             .font(.system(size: 30, weight: .heavy))
                             .padding(.top, -60)
                             .padding(.trailing, 20)
-//                            .foregroundColor(.white)
                     }
                     .frame(width: 330, height: 60, alignment: .trailing)
                     //横並びに文字を表示
@@ -120,7 +119,6 @@ struct ContentView: View {
                             .font(.system(size: 20, weight: .heavy))
                             .padding(.leading, 5)
                     }
-//                    .frame(width: 400, height: 40, alignment: .leading)
                     .padding(.leading, 20)
                     Spacer()
                 }.padding(.top, -80)        //画像の配置を調整
